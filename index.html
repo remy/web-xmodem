@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Xmodem</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./main.js" type="module"></script>
+  </head>
+
+  <body>
+    <main>
+      <h1>Web Xmodem</h1>
+      <p>Using the simplest <a href="https://en.m.wikipedia.org/wiki/XMODEM#Transfer_details">xmodem</a> protocol, this
+        page will connect to USB devices and send and receive
+        data.</p>
+      <div>
+        <button id="connect">Connect</button>
+        <label>Baud rate: <input name="baud" type="text" placeholder="38400" list="baud"></label>
+        <datalist id="baud">
+          <option>9600</option>
+          <option>14400</option>
+          <option>19200</option>
+          <option>28800</option>
+          <option>38400</option>
+          <option>57600</option>
+          <option>115200</option>
+          </select>
+      </div>
+      <div disabled>
+        <label id="send" class="button">Send <input hidden type="file"></label>
+        <button id="receive">Receive</button>
+        <div>
+          <p>Transferred: <code id="transferred">Waiting</code></p>
+          <details open>
+            <summary>Log</summary>
+            <pre id="log"></pre>
+          </details>
+    </main>
+    <footer>
+      <p>Built by <a href="https://remysharp.com">@rem</a> for <abbr title="WonderSwan">✨🦢</abbr> support </p>
+    </footer>
+  </body>
+
+</html>
