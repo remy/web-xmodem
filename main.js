@@ -55,7 +55,9 @@ $connect.addEventListener("click", async () => {
       modem.on("status", (amount) => (transferred.textContent = amount));
 
       $connect.parentElement.hidden = true;
-      $send.closest("div").removeAttribute("disabled");
+      const parent = $send.closest("div");
+      parent.removeAttribute("disabled");
+      parent.removeAttribute("aria-disabled");
     })
     .catch((e) => {
       console.log("open failed", e);

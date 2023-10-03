@@ -14,7 +14,11 @@
       <h1>Web Xmodem</h1>
       <p>Using the simplest <a href="https://en.m.wikipedia.org/wiki/XMODEM#Transfer_details">xmodem</a> protocol, this
         page will connect to USB devices and send and receive
-        data.</p>
+        data using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Serial">Web Serial</a>.</p>
+      <p id="support">🛑 Your browser <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Serial#browser_compatibility"><strong>does
+            not</strong></a> support Web Serial (yet) 😔</p>
+      <script>if (navigator.serial) document.querySelector("#support").hidden = true;</script>
       <div>
         <button id="connect">Connect</button>
         <label>Baud rate: <input name="baud" type="text" placeholder="38400" list="baud"></label>
@@ -28,7 +32,7 @@
           <option>115200</option>
           </select>
       </div>
-      <div disabled>
+      <div aria-disabled="true">
         <label id="send" class="button">Send <input hidden type="file"></label>
         <button id="receive">Receive</button>
         <div>
