@@ -1,5 +1,5 @@
-import save from "./save.js";
-import Xmodem from "./xmodem.js";
+import save from './save.js';
+import Xmodem from './xmodem.js';
 
 /**
  *
@@ -11,20 +11,20 @@ const $ = (s) => document.querySelector(s);
 /** @type {Xmodem} */
 let modem;
 
-const transferred = $("#transferred");
-const log = $("#log");
-const $receive = $("#receive");
-const $send = $("#send");
-const $connect = $("#connect");
+const transferred = $('#transferred');
+const log = $('#log');
+const $receive = $('#receive');
+const $send = $('#send');
+const $connect = $('#connect');
 const $baud = $('input[name="baud"]');
 
-$receive.addEventListener("click", async () => {
+$receive.addEventListener('click', async () => {
   const reply = await modem.receive();
-  const filename = prompt("Filename?");
+  const filename = prompt('Filename?');
   save(reply, filename);
 });
 
-$send.addEventListener("input", async (event) => {
+$send.addEventListener('input', async (event) => {
   const file = event.target.files[0];
   const reader = new FileReader();
 
@@ -35,32 +35,33 @@ $send.addEventListener("input", async (event) => {
   reader.readAsArrayBuffer(file);
 });
 
-$connect.addEventListener("click", async () => {
+$connect.addEventListener('click', async () => {
   // const usbVendorId = 0xabcd;
   navigator.serial
     .requestPort()
     .then((port) => {
       // Connect to `port` or add it to the list of available ports.
 
-      let baudRate = parseInt($baud.value || "38400", 10);
+      let baudRate = parseInt($baud.value || '38400', 10);
 
       modem = new Xmodem(port, baudRate);
-      modem.on("log", (report) => {
+      modem.on('log', (report) => {
         log.innerHTML =
           `<code><time>${new Date()
             .toJSON()
-            .split("T")
-            .pop()}</time>: ${report}</code>\n` + log.innerHTML;
+            .split('T')
+            .pop()}</time>: ${report}</code>\n` +
+          log.innerHTML.split('\n').slice(0, 5).join('\n');
       });
-      modem.on("status", (amount) => (transferred.textContent = amount));
+      modem.on('status', (amount) => (transferred.textContent = amount));
 
       $connect.parentElement.hidden = true;
-      const parent = $send.closest("div");
-      parent.removeAttribute("disabled");
-      parent.removeAttribute("aria-disabled");
+      const parent = $send.closest('div');
+      parent.removeAttribute('disabled');
+      parent.removeAttribute('aria-disabled');
     })
     .catch((e) => {
-      console.log("open failed", e);
+      console.log('open failed', e);
       // The user didn't select a port.
     });
 });
