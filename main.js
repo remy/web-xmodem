@@ -51,7 +51,7 @@ $connect.addEventListener('click', async () => {
             .toJSON()
             .split('T')
             .pop()}</time>: ${report}</code>\n` +
-          log.innerHTML.split('\n').slice(0, 5).join('\n');
+          log.innerHTML.split('\n').slice(0, 9).join('\n');
       });
       modem.on('status', (amount) => (transferred.textContent = amount));
 
